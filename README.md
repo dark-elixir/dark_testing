@@ -10,7 +10,7 @@ by adding `dark_testing` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:dark_testing, "~> 1.0.0"}
+    {:dark_testing, ">= 1.0.0"}
   ]
 end
 ```
