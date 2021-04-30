@@ -17,7 +17,7 @@ defmodule DarkTesting.MixProject do
       version: @version,
       deps: deps(),
       start_permanent: Mix.env() == :prod,
-      dialyzer: [plt_add_apps: [:ex_unit]],
+      dialyzer: dialyzer(),
 
       # Hex
       description: @description,
@@ -36,13 +36,14 @@ defmodule DarkTesting.MixProject do
 
   defp deps do
     [
-      {:dark_dev, ">= 1.0.3", only: [:dev, :test], runtime: false},
-      {:dark_matter, ">= 1.0.3"},
-      # {:dark_ecto, ">= 1.0.0"},
-      {:dark_ecto, path: "../dark_ecto"},
       {:ecto, ">= 3.0.0", optional: true},
+      {:absinthe, ">= 1.6.0", optional: true},
+      {:dark_dev, ">= 1.0.8", only: [:dev, :test], runtime: false},
+      {:dark_ecto, ">= 1.0.1"},
+      {:dark_matter, ">= 1.1.1"},
       {:jason, ">= 1.0.0"},
-      {:struct_assert, ">= 0.0.0"}
+      {:struct_assert, ">= 0.0.0"},
+      {:doctor, ">= 0.0.0", only: [:dev]}
     ]
   end
 
@@ -79,6 +80,40 @@ defmodule DarkTesting.MixProject do
   defp groups_for_extras do
     [
       # Introduction: ~r/guides\/introduction\/.?/,
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_add_deps: :app_tree,
+      plt_add_apps: [:ex_unit, :absinthe],
+      list_unused_filters: true,
+      flags: [
+        # Useful additions
+        :error_handling,
+        :no_opaque,
+        :race_conditions,
+        :underspecs,
+        :unmatched_returns,
+
+        # Strict (annoying / low-impact)
+        # :overspecs,
+        # :specdiffs,
+
+        # Less common / potentially confusing
+        # (Can disable without much consequence)
+        :no_behaviours,
+        :no_contracts,
+        :no_fail_call,
+        :no_fun_app,
+        :no_improper_lists,
+        :no_match,
+        :no_missing_calls,
+        :no_return,
+        :no_undefined_callbacks,
+        :no_unused,
+        :unknown
+      ]
     ]
   end
 end

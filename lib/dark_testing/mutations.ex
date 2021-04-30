@@ -16,6 +16,24 @@ defmodule DarkTesting.Mutations do
             json: %{},
             matcher: %{}
 
+  @type t() :: %__MODULE__{
+          selected: selected(),
+          mutations: mutations(),
+          override_params: atom_map(),
+          params: atom_map(),
+          atom_params: atom_map(),
+          string_params: string_map(),
+          json: string_map(),
+          matcher: matcher()
+        }
+
+  @type atom_map() :: %{required(atom()) => any()}
+  @type string_map() :: %{required(String.t()) => any()}
+
+  @type selected() :: [atom()]
+  @type mutations() :: [atom()]
+  @type matcher() :: atom_map()
+
   defmacro __using__(opts \\ []) do
     factory = Keyword.get(opts, :factory, __CALLER__.module)
 

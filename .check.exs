@@ -9,6 +9,7 @@
     {:formatter, "mix format --check-formatted", detect: [file: ".formatter.exs"]},
     {:credo, "mix credo --strict", detect: [package: :dark_dev]},
     {:sobelow, "mix sobelow --config", umbrella: [recursive: true], detect: [package: :dark_dev]},
+    {:doctor, "mix doctor", detect: [package: :dark_dev]},
     {:ex_doc, "mix docs", detect: [package: :dark_dev]},
     {:ex_unit, "mix test", detect: [file: "test"]},
     {:dialyzer, "mix dialyzer", detect: [package: :dark_dev]}

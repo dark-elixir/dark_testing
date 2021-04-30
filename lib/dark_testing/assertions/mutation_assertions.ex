@@ -39,8 +39,7 @@ defmodule DarkTesting.Assertions.MutationAssertions do
   end
 
   defp source_params(given) do
-    given
-    |> Maps.compact(deep: true, allow_nil: true)
+    Maps.compact(given, deep: true, allow_nil: true)
   end
 
   defp mutation_params(given, params, matcher) do

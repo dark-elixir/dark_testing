@@ -11,5 +11,5 @@
     mutation: 1,
     mutation: 2
   ],
-  inputs: ["{mix,.check,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"]
+  inputs: ["mix.exs", "*.{ex,exs}", "{config,lib,test}/**/*.{ex,exs}"]
 ]

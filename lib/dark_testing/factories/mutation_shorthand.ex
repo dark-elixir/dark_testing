@@ -18,15 +18,15 @@ defmodule DarkTesting.Factories.MutationShorthand do
   """
   @type t() :: %__MODULE__{
           key: key(),
-          lookup: lookup(),
           assocs: assocs(),
+          lookup: lookup(),
           mutations: mutations(),
           params: params()
         }
 
   @type key() :: atom()
   @type assocs() :: [atom()]
-  @type lookup() :: [atom(), ...] | (() -> any) | (map() -> any)
+  @type lookup() :: [atom(), ...] | (() -> any()) | (map() -> any())
   @type mutations() :: [atom(), ...]
   @type params() :: %{required(atom()) => any()}
 
@@ -56,7 +56,9 @@ defmodule DarkTesting.Factories.MutationShorthand do
   def new(key, [mutation | _] = mutations, assocs, params, lookup)
       when is_atom(key) and
              is_atom(mutation) and
-             is_map(params) do
+             is_list(assocs) and
+             is_map(params) and
+             (is_list(lookup) or is_function(lookup, 0) or is_function(lookup, 1)) do
     %__MODULE__{
       key: key,
       mutations: mutations,

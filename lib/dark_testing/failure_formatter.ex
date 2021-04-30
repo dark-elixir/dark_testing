@@ -35,7 +35,7 @@ defmodule DarkTesting.FailureFormatter do
 
   defp maybe_inspect(:actual, value, %{inspect_actual: false}), do: value
   defp maybe_inspect(:expect, value, %{inspect_expect: false}), do: value
-  defp maybe_inspect(_, value, _), do: inspect(value)
+  defp maybe_inspect(_type, value, _opts), do: inspect(value)
 
   @doc """
   Removes `nil` value from `list` and joins by `delimiter`
